@@ -4,10 +4,10 @@ import { createBlockedUrlSchema } from '@/lib/validations'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = params.id
+    const { id: userId } = await params
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -31,10 +31,10 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = params.id
+    const { id: userId } = await params
     const body = await request.json()
 
     const validation = createBlockedUrlSchema.safeParse(body)

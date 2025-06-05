@@ -3,10 +3,10 @@ import { prisma } from '@/lib/prisma'
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string; urlId: string } }
+  { params }: { params: Promise<{ id: string; urlId: string }> }
 ) {
   try {
-    const { id: userId, urlId } = params
+    const { id: userId, urlId } = await params
 
     // Verificar se a URL bloqueada existe e pertence ao usuário
     const blockedUrl = await prisma.blockedUrl.findUnique({
