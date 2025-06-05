@@ -1,0 +1,23 @@
+# Generated files
+src/generated/
+.next/
+node_modules/
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+out/
+.vercel/ 

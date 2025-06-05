@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:force": "NEXT_LINT=false next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "db:seed": "tsx scripts/seed.ts"
   },
   "dependencies": {

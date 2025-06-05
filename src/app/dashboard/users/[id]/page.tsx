@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -39,7 +39,7 @@ export default function UserDetailsPage() {
     resolver: zodResolver(createBlockedUrlSchema)
   })
 
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     try {
       // Buscar dados do usuário
       const userResponse = await fetch(`/api/users`)
@@ -67,7 +67,7 @@ export default function UserDetailsPage() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [userId])
 
   const onSubmit = async (data: CreateBlockedUrlInput) => {
     setIsCreating(true)
@@ -117,7 +117,7 @@ export default function UserDetailsPage() {
     if (userId) {
       fetchUserData()
     }
-  }, [userId])
+  }, [userId, fetchUserData])
 
   if (isLoading) {
     return (
